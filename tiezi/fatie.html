@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="https://weui.io/weui.css" />
+		<script src="https://weui.io/zepto.min.js"></script>-->
+		<link rel="stylesheet" href="js/weui-master/dist/style/weui.css">
+		<script src="js/weui-master/dist/example/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+  	
+		<title>发布帖子</title>
+
+		<script type="text/javascript" class="dialog js_show">
+			function titleinfo() {
+				var $iosDialog2 = $('#iosDialog2');
+				$("#infotext").text("请输入标题"); //input 赋值 动态
+				$iosDialog2.fadeIn(200);
+			}
+
+			function aritleinfo() {
+				var $iosDialog2 = $('#iosDialog2');
+				$("#infotext").text("请输入内容"); //input 赋值 动态
+				$iosDialog2.fadeIn(200);
+			}
+
+			function canshuinfo() {
+				var $iosDialog2 = $('#iosDialog2');
+				$("#infotext").text("请输入完整"); //input 赋值 动态
+				$iosDialog2.fadeIn(200);
+			}
+
+			function cancelinfo() {
+				var $iosDialog2 = $('#iosDialog2');
+				$iosDialog2.fadeOut(100);
+			}
+
+			function successinfo() {
+				var $iosDialog21 = $('#iosDialog21');
+				$("#infotext21").text("发布成功");
+				$iosDialog21.fadeIn(200);
+			}
+
+		</script>
+
+		<script>
+			$(function() {
+				$('#showTooltips').click(function() {
+					var title = $('#title').val();
+					var aritle = $('#aritle').val();
+					if (title == "") {
+						titleinfo();
+						return false;
+					}
+					if (aritle == "") {
+						aritleinfo();
+						return false;
+					}
+					$.ajax({
+						type: "post",
+						url: "fatietest.php",
+						dataType: "json",
+						data: {
+							title: title,
+							aritle: aritle,
+						},
+						success: function(data) {
+							if (data.code == 1) {
+								canshuinfo();
+							} else {
+								successinfo();
+								//console.log(data.user_id);
+//								location.href="list.html?id="+data.user_id;
+                                location.href="list.html";
+							}
+                           // console.log(data);
+						}
+					});
+				});
+			});
+
+			$(function() {
+				$('#calTooltips').click(function() {
+					 $('#title').val("");
+					 $('#aritle').val("");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="js_dialog" id="iosDialog2" style="opacity: 0; display: none;">
+			<div class="weui-mask"></div>
+			<div class="weui-dialog">
+				<div class="weui-dialog__bd" id="infotext">请填写完整</div>
+				<div class="weui-dialog__ft">
+					<a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="cancelinfo()">知道了</a>
+				</div>
+			</div>
+		</div>
+		<div class="js_dialog" id="iosDialog21" style="opacity: 0; display: none;">
+			<div class="weui-mask"></div>
+			<div class="weui-dialog">
+				<div class="weui-dialog__bd" id="infotext21">请填写完整</div>
+				<div class="weui-dialog__ft">
+					<a href="" class="weui-dialog__btn weui-dialog__btn_primary" >知道了</a>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title">标题</div>
+		<div class="weui-cells">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input id="title" class="weui-input" type="text" placeholder="请输入标题">
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title">内容</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<textarea id="aritle" class="weui-textarea" placeholder="请输入内容" rows="3"></textarea>
+					<div class="weui-textarea-counter"><span>0</span>/200</div>
+				</div>
+			</div>
+		</div>
+		<div class="weui-btn-area">
+			<!--
+            	作者：17862818020@139.com
+            	时间：2017-08-10
+            	描述：
+            	<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">点击发布</a>
+            -->
+			<input class="weui-btn weui-btn_primary" type="button" name="showTooltips" id="showTooltips" value="点击发布" />
+		</div>
+		<div class="weui-btn-area">
+			<input class="weui-btn weui-btn_primary" type="button" name="calTooltips" id="calTooltips" value="取消发布" />
+		</div>
+	</body>
+
+</html>

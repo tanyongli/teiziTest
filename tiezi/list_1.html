@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			帖子列表
+		</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="https://weui.io/weui.css" />
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.more.js"></script>
+		<script src="https://weui.io/zepto.min.js"></script>
+		<link rel="stylesheet" href="js/weui-master/dist/style/weui.css">
+		<script src="js/weui-master/dist/example/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+  	
+		<script type="text/javascript">
+			//$(document).ready(function() { 
+			$(function(){
+				//$("button").click(function() {
+					$.ajax({
+						type: "post",
+						url: "list_1test.php",
+						dataType:"json",
+						success: function(data) {
+							console.log(data);
+							var html = '';
+							for (var i = 0; i < data.length; i++) {
+								html += '<div class="sin">' +
+									'<a class="weui-cell weui-cell_access" href="aritle.php?id='+data[i]['postid']+'">' +
+									'<div class="postid">' +data[i]['postid']+ '</div>' +
+									'<div class="weui-cell__bd">' +
+									'<p class="title">' + data[i]['title'] + '</p>' +
+									'</div>' +
+									'<div class="weui-cell__ft">' +
+									'<div class="nickname">'+data[i]['nickname']+'</div>' +
+									'</div>' +
+									'</a>' +
+									'</div>';
+							}
+							$('#more').append(html);
+
+						},
+					});
+
+				//});
+			});
+		</script>
+		
+	</head>
+
+	<body>
+		<div class="weui-cells">
+			<a class="weui-cell weui-cell_access" href="fatie.html">
+				<div class="weui-cell__bd">
+					<p>
+						写帖子
+					</p>
+				</div>
+				<div class="weui-cell__ft">
+					点击填写自己的帖子
+				</div>
+			</a>
+		</div>
+		<div class="weui-cells__title">
+			帖子列表
+		</div>
+
+		<div class="weui-cells" id="more">
+			<!--<div class="sin">
+				<a class="weui-cell weui-cell_access">
+					<div class="postid">1</div>&nbsp;&nbsp;
+					    <div class="weui-cell__bd">
+						    <p class="title">title</p>
+				     	</div>
+					<div class="weui-cell__ft">
+						<div class="nickname">nickname</div>
+					</div>
+				</a>
+			</div>-->
+		</div>
+		<div>
+			<button>在每个元素的结尾添加内容</button>
+		</div>
+			
+        
+        
+        <div class="weui-tabbar">
+	<a href="list.php" class="weui-tabbar__item weui-bar__item_on">
+		<span style="display: inline-block;position: relative;">
+			<img src="http://weui.io/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+			
+			
+		<p class="weui-tabbar__label">
+			首页
+		</p>
+	</a>
+	<a href="find.html" class="weui-tabbar__item">
+		<span style="display: inline-block;position: relative;">
+			<img src="http://weui.io/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+			
+		</span>
+		<p class="weui-tabbar__label">
+			发现
+		</p>
+	</a>
+	<a href="my.php" class="weui-tabbar__item">
+		<img src="http://weui.io/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+		<p class="weui-tabbar__label">
+			我
+		</p>
+	</a>
+</div>
+	</body>
+
+</html>
+
+
+﻿
+
+​
